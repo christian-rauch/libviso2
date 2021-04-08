@@ -14,9 +14,6 @@ SET(CMAKE_CXX_FLAGS "-msse3")
 # sources
 FILE(GLOB LIBVISO2_SRC_FILES "src/*.cpp")
 
-# make release version
-set(CMAKE_BUILD_TYPE Release)
-
 # demo program
 add_executable(viso2 ${LIBVISO2_SRC_FILES})
 target_link_libraries (viso2 png)
