@@ -25,6 +25,19 @@ set (LIBVISO2_SRC_FILES
     "src/viso_stereo.cpp"
 )
 
+# headers
+set (LIBVISO2_HDR_FILES
+    "src/filter.h"
+    "src/matcher.h"
+    "src/matrix.h"
+    "src/reconstruction.h"
+    "src/timer.h"
+    "src/triangle.h"
+    "src/viso.h"
+    "src/viso_mono.h"
+    "src/viso_stereo.h"
+)
+
 add_library(${PROJECT_NAME} ${LIBVISO2_SRC_FILES})
 
 # include directory
@@ -41,3 +54,24 @@ else()
     message(NOTICE "PNG support not available (need 'png++' and 'libpng').")
 endif()
 
+
+################################
+## INSTALLATION
+
+include(GNUInstallDirs)
+
+# install library
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+# install headers
+install(FILES ${LIBVISO2_HDR_FILES}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+# create a CMake configuration
+install(EXPORT ${PROJECT_NAME}
+    DESTINATION share/${PROJECT_NAME}/cmake
+    FILE ${PROJECT_NAME}Config.cmake
+)
